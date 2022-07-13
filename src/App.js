@@ -1,25 +1,101 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/Navbar.js";
+import About from "./components/About.js";
+import Textarea from "./components/Textarea";
+import Alert from "./components/Alert.js";
+import React ,{  useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
+
 
 function App() {
+  //enable dark mode
+
+  const [mode, setMode] = useState("light");
+  
+  // enable alert for mode change
+  const [alert, setAlert] = useState(null);
+
+ 
+//const alert with message type and message
+  const showAlert = (message, type) => {
+
+    setAlert({
+
+      message: message,
+      type:type
+
+    });
+  }
+
+
+
+  
+
+  const toogleMode = () => {
+    setMode(mode === "light" ? "dark" : "light",
+
+    );
+
+
+    if (mode === "light") {
+      document.body.style.backgroundColor = "grey";
+      showAlert("darkMode has been enabled","success")
+    }
+    else {
+      document.body.style.backgroundColor = "white";
+      showAlert("darkMode has been disabled","success")
+    }
+
+
+
+    
+  }
+
+  //enable dark background
+  
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <>
+    {/* function App() {
+  //enable dark mode 
+
+  const [mode, setMode] = useState("light");
+  
+
+  const toogleMode = () => {
+    setMode(mode === "light" ? "dark" : "light");
+  }
+*/}
+
+<Router>
+      <Navbar title="TextUtils" home="Home" mode={mode} toogleMode={toogleMode} />
+      <Alert alert={alert}  showAlert ={showAlert}  />
+
+      <Routes>
+          <Route path="/about"
+            element={<About />} />
+         
+
+          <Route path="/"
+            element={<Textarea showAlert={showAlert}heading="" mode={mode} />} />
+        
+      </Routes>
+
+      </Router>
+    </>
   );
 }
+
+  
+ 
+
 
 export default App;
