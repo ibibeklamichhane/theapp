@@ -3,13 +3,7 @@ import About from "./components/About.js";
 import Textarea from "./components/Textarea";
 import Alert from "./components/Alert.js";
 import React ,{  useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
-
+//import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 
 
 function App() {
@@ -75,21 +69,18 @@ function App() {
   }
 */}
 
-<Router>
+
       <Navbar title="TextUtils" home="Home" mode={mode} toogleMode={toogleMode} />
       <Alert alert={alert}  showAlert ={showAlert}  />
 
-      <Routes>
-          <Route path="/about"
-            element={<About />} />
+        
          
 
-          <Route path="/"
-            element={<Textarea showAlert={showAlert}heading="" mode={mode} />} />
+         
+            <Textarea showAlert={showAlert}heading="" mode={mode} />
         
-      </Routes>
+    
 
-      </Router>
     </>
   );
 }
